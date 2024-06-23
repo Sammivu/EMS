@@ -1,0 +1,6 @@
+EMPLOYEE MANAGEMENT SYSTEM WITH HIBERNATECreate an employee management
+ system where employee attendance, leave time and salaries can be tracked by management
+
+
+ The Spring MVC was used to implement this system such as Hibernate, HTML,CSS, Spring MVC, Dependency injection,
+ Thymeleaf

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Leave List</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"
+    >
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Employee Leave System</a>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/leave/apply}">Apply for Leave</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/leave/list}">Leave List</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Leave Applications</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="leave : ${leaves}">
+                            <td th:text="${leave.employee.firstName} + ' ' + ${leave.employee.lastName}"></td>
+                            <td th:text="${leave.startDate}"></td>
+                            <td th:text="${leave.endDate}"></td>
+                            <td th:text="${leave.reason}"></td>
+                            <td th:text="${leave.leaveStatus}"></td>
+                            <td>
+                                <a th:href="@{/leave/approve/{id}(id=${leave.id})}" class="btn btn-primary">Update</a>
+<!--                                <form th:action="@{/leave/updateStatus}" method="post" style="display:inline;">-->
+<!--                                    <input type="hidden" name="leave" th:value="${leave.id}">-->
+<!--                                    <select name="status" class="form-control">-->
+<!--                                        <option th:value="PENDING" th:selected="${leave.leaveStatus.name() == 'PENDING'}">PENDING</option>-->
+<!--                                        <option th:value="APPROVED" th:selected="${leave.leaveStatus.name() == 'APPROVED'}">APPROVED</option>-->
+<!--                                        <option th:value="REJECTED" th:selected="${leave.leaveStatus.name() == 'REJECTED'}">REJECTED</option>-->
+<!--                                    </select>-->
+<!--                                    <button type="submit" class="btn btn-primary mt-2">Update</button>-->
+<!--                                </form>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
